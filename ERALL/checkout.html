@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - ERALL</title>
+    <link rel="icon" href="images/img.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Stilet specifike për checkout */
+        .checkout-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 20px;
+        }
+        
+        .checkout-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        /* Form Container */
+        .checkout-form-section {
+            background: var(--color-darker);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Order Summary */
+        .checkout-summary-section {
+            background: var(--color-darker);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Section Headers */
+        .section-title {
+            color: var(--color-gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--color-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-section-title {
+            color: var(--color-beige);
+            font-size: 1.2rem;
+            margin: 20px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-section-title:first-child {
+            margin-top: 0;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-beige);
+            font-weight: 500;
+        }
+        
+        .form-group.required label::after {
+            content: " *";
+            color: #ff6b6b;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--color-dark);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-white);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Shipping Info */
+        .shipping-info {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .free-shipping-badge {
+            background: var(--color-gold);
+            color: var(--color-dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        /* Payment Info */
+        .payment-info {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .cod-badge {
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        /* Order Items */
+        .order-items {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 25px;
+            padding-right: 10px;
+        }
+        
+        .order-items::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .order-items::-webkit-scrollbar-track {
+            background: var(--color-dark);
+            border-radius: 10px;
+        }
+        
+        .order-items::-webkit-scrollbar-thumb {
+            background: var(--color-gold);
+            border-radius: 10px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: var(--color-dark);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
+        .item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: var(--color-darker);
+            border-radius: 6px;
+            padding: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-weight: 500;
+            color: var(--color-white);
+            margin-bottom: 5px;
+        }
+        
+        .item-category {
+            font-size: 0.85rem;
+            color: var(--color-beige);
+            opacity: 0.7;
+        }
+        
+        .item-quantity-price {
+            text-align: right;
+        }
+        
+        .item-quantity-price span {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--color-beige);
+        }
+        
+        .item-total {
+            font-weight: 600;
+            color: var(--color-gold);
+            font-size: 1.1rem;
+        }
+        
+        /* Order Total */
+        .order-total {
+            background: var(--color-dark);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--color-border);
+        }
+        
+        .total-row.final {
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-top: 2px solid var(--color-gold);
+            border-bottom: none;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        
+        .final-total {
+            color: var(--color-gold);
+        }
+        
+        /* Free Items Banner */
+        .free-items-banner {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .free-items-banner i {
+            color: var(--color-gold);
+            margin-right: 10px;
+        }
+        
+        /* Checkout Actions */
+        .checkout-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-actions {
+                flex-direction: column;
+            }
+            
+            .checkout-actions button {
+                width: 100%;
+            }
+        }
+        
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            flex: 1;
+        }
+        
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .btn-back {
+            background: transparent;
+            color: var(--color-beige);
+            border: 1px solid var(--color-border);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-back:hover {
+            background: var(--color-dark);
+            border-color: var(--color-gold);
+        }
+        
+        /* Error States */
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .has-error input,
+        .has-error select,
+        .has-error textarea {
+            border-color: #ff6b6b;
+        }
+        
+        /* Empty Cart */
+        .empty-cart-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--color-beige);
+        }
+        
+        .empty-cart-message i {
+            font-size: 4rem;
+            color: var(--color-gold);
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart-message h3 {
+            color: var(--color-white);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="checkout-page">
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+    
+    <main class="checkout-container">
+        <!-- Order Summary -->
+        <div class="checkout-summary-section">
+            <h2 class="section-title">
+                <i class="fas fa-shopping-bag"></i><br><br>Përmbledhja e Porosisë
+            </h2>
+            
+            <!-- Order Items -->
+            <div class="order-items" id="orderItems">
+                <!-- Do të mbushët me JavaScript -->
+            </div>
+            
+            <!-- Order Total -->
+            <div class="order-total">
+                <div class="total-row">
+                    <span>Nëntotali:</span>
+                    <span id="subtotalAmount">0 Lekë</span>
+                </div>
+                
+                <div class="total-row">
+                    <span>Dërgimi:</span>
+                    <span id="shippingAmount">0 Lekë</span>
+                </div>
+                
+                <div class="total-row final">
+                    <span>TOTALI:</span>
+                    <span class="final-total" id="totalAmount">0 Lekë</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Checkout Form -->
+        <div class="checkout-form-section">
+            <h1 class="section-title">
+                <i class="fas fa-shipping-fast"></i> Informacioni i Porosisë
+            </h1>
+            
+            <form id="checkout-form">
+                <!-- Personal Information -->
+                <h3 class="form-section-title">
+                    <i class="fas fa-user"></i> Informacion Personal
+                </h3>
+                
+                <div class="form-group required">
+                    <label for="full-name">Emri i Plotë</label>
+                    <input type="text" id="full-name" name="full_name" required 
+                           placeholder="Shkruaj emrin e plotë">
+                    <div class="error-message" id="nameError">Ju lutem shkruani emrin e plotë</div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group required">
+                        <label for="phone">Numri i Telefonit</label>
+                        <input type="tel" id="phone" name="phone" required 
+                               placeholder="+355 XX XXX XXXX">
+                        <div class="error-message" id="phoneError">Ju lutem shkruani një numër telefoni të vlefshëm</div>
+                    </div>
+                    
+                
+                <!-- Shipping Address -->
+                <h3 class="form-section-title">
+                    <i class="fas fa-map-marker-alt"></i> Adresa e Dërgimit
+                </h3>
+                
+                <div class="form-group required">
+                    <label for="city">Qyteti</label>
+                    <select id="city" name="city" required>
+                        <option value="">Zgjidh Qytetin</option>
+                        <option value="tirane">Tiranë</option>
+                        <option value="durres">Durrës</option>
+                        <option value="vlore">Vlorë</option>
+                        <option value="shkoder">Shkodër</option>
+                        <option value="elbasan">Elbasan</option>
+                        <option value="fier">Fier</option>
+                        <option value="korce">Korçë</option>
+                        <option value="berat">Berat</option>
+                        <option value="lushnje">Lushnjë</option>
+                        <option value="kavaje">Kavajë</option>
+                        <option value="other">Tjetër</option>
+                    </select>
+                    <div class="error-message" id="cityError">Ju lutem zgjidhni një qytet</div>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="address">Adresa e Plotë</label>
+                    <textarea id="address" name="address" rows="3" required 
+                              placeholder="Rruga, Pallati"></textarea>
+                    <div class="error-message" id="addressError">Ju lutem shkruani adresën e plotë</div>
+                </div>
+                
+                <!-- Shipping & Payment Information -->
+                <div class="shipping-info">
+                    <h4><i class="fas fa-truck"></i> Informacione për Dërgim</h4>
+                    <p>Dërgesa është <strong>FALAS</strong> për të gjitha porositë me 2 ose më shumë produkte!</p>
+                </div>
+                
+                <div class="payment-info">
+                    <h4><i class="fas fa-credit-card"></i> Informacione për Pagesë</h4>
+                    <p>Pagesa bëhet <strong>në dorëzim (Cash on Delivery)</strong>. Ju paguani kur merrni produktin.</p>
+                </div>
+                
+                <!-- Notes -->
+                <h3 class="form-section-title">
+                    <i class="fas fa-sticky-note"></i> Shënime shtesë (opsional)
+                </h3>
+                
+                <div class="form-group">
+                    <textarea id="notes" name="notes" rows="3" 
+                              placeholder="Shënime për preferencën e porosisë."></textarea>
+                </div>
+                
+                <!-- Checkout Actions -->
+                <div class="checkout-actions">
+                    <button type="button" class="btn-back" id="backToCartBtn">
+                        <i class="fas fa-arrow-left"></i> Kthehu te Shporta
+                    </button>
+                    
+                    <button type="button" class="btn-whatsapp" id="whatsappBtn">
+                        <i class="fa fa-paper-plane"></i> Dërgo Porosinë
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Import cart functions nga cart.js
+        function getCart() {
+            return JSON.parse(localStorage.getItem('aromexa-cart')) || [];
+        }
+        
+        function saveCart(cart) {
+            localStorage.setItem('aromexa-cart', JSON.stringify(cart));
+        }
+        
+        // Initialize checkout page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCheckoutData();
+            setupEventListeners();
+            loadNavbarAndFooter();
+        });
+        
+        // Load navbar and footer
+        function loadNavbarAndFooter() {
+            // Load navbar
+            fetch('components/navbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('navbar-placeholder').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading navbar:', error));
+            
+            // Load footer
+            fetch('components/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-placeholder').innerHTML = html;
+                })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+        
+        // Load cart data and update display
+        function loadCheckoutData() {
+            const cart = getCart();
+            const orderItemsContainer = document.getElementById('orderItems');
+            
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = `
+                    <div class="empty-cart-message">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Shporta është e zbrazët</h3>
+                        <p>Shtoni produkte për të vazhduar</p>
+                        <button class="btn-back" onclick="window.location.href='shop.html'" style="margin-top: 20px;">
+                            <i class="fas fa-store"></i> Shiko Produktet
+                        </button>
+                    </div>
+                `;
+                updateOrderSummary(0);
+                return;
+            }
+            
+            let itemsHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                
+                itemsHTML += `
+                    <div class="order-item">
+                        <div class="item-info">
+                            <img src="${item.image}" alt="${item.name}" class="item-image">
+                            <div class="item-details">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-category">${item.category}</div>
+                            </div>
+                        </div>
+                        <div class="item-quantity-price">
+                            <span>${item.quantity} × ${item.price.toLocaleString()} Lekë</span>
+                            <div class="item-total">${itemTotal.toLocaleString()} Lekë</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            orderItemsContainer.innerHTML = itemsHTML;
+            updateOrderSummary(subtotal);
+        }
+        
+        // Update order summary
+        function updateOrderSummary(subtotal) {
+            // Dërgesa është falas për 2+ produkte
+            const cart = getCart();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            let shippingCost = 0;
+            
+            // Nëse ka më pak se 2 produkte, shto dërgesë 200 Lekë
+            if (totalItems < 2) {
+                shippingCost = 200;
+            }
+            
+            const total = subtotal + shippingCost;
+            
+            // Update display
+            document.getElementById('subtotalAmount').textContent = `${subtotal.toLocaleString()} Lekë`;
+            document.getElementById('shippingAmount').textContent = `${shippingCost.toLocaleString()} Lekë`;
+            document.getElementById('totalAmount').textContent = `${total.toLocaleString()} Lekë`;
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Back to cart button
+            document.getElementById('backToCartBtn').addEventListener('click', function() {
+                window.location.href = 'shop.html?view=cart';
+            });
+            
+            // WhatsApp button
+            document.getElementById('whatsappBtn').addEventListener('click', sendToWhatsApp);
+            
+            // Form submission (vetëm për validim)
+            document.getElementById('checkout-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Vetëm validim, nuk ruhet porosia
+                validateForm();
+            });
+        }
+        
+        // Send order to WhatsApp
+        function sendToWhatsApp() {
+            console.log("Dërgo në WhatsApp u thirr!");
+            
+            // Validojmë formën
+            if (!validateForm()) {
+                console.log("Validimi i formës dështoi!");
+                alert('Ju lutem plotësoni të gjitha fushat e detyrueshme!');
+                return;
+            }
+            
+            // Marrim të dhënat nga forma
+            const formData = getFormData();
+            console.log("Të dhënat nga forma:", formData);
+            
+            // Marrim shportën
+            const cart = getCart();
+            console.log("Produktet në shportë:", cart);
+            
+            if (cart.length === 0) {
+                alert('Shporta është e zbrazët! Shtoni produkte për të vazhduar.');
+                return;
+            }
+            
+            // Krijojmë mesazhin për WhatsApp
+            let message = `📦 *POROSIA*\n\n`;
+            
+            // Informacioni personal
+            message += `👤 *INFORMACION PERSONAL*\n`;
+            message += `Emri: ${formData.full_name}\n`;
+            message += `Telefon: ${formData.phone}\n`;
+            if (formData.email) message += `Email: ${formData.email}\n`;
+            
+            // Adresa
+            message += `\n📍 *ADRESA E DËRGIMIT*\n`;
+            const citySelect = document.getElementById('city');
+            const selectedCity = citySelect.options[citySelect.selectedIndex].text;
+            message += `Qyteti: ${selectedCity}\n`;
+            message += `Adresa: ${formData.address}\n`;
+            if (formData.postal_code) message += `Kodi Postar: ${formData.postal_code}\n`;
+            
+            // Produktet
+            message += `\n🛒 *PRODUKTET*\n`;
+            let subtotal = 0;
+            let totalItems = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+                totalItems += item.quantity;
+                message += `➤ ${item.quantity}x ${item.name}\n`;
+                message += `   ${item.price.toLocaleString()} Lekë × ${item.quantity} = ${itemTotal.toLocaleString()} Lekë\n`;
+            });
+            
+            // Llogaritja e dërgesës
+            let shippingCost = 0;
+            if (totalItems < 2) {
+                shippingCost = 200;
+            }
+            
+            const total = subtotal + shippingCost;
+            
+            // Totali
+            message += `\n💰 *PËRMBLEDHJE FINANCIARE*\n`;
+            message += `Nëntotali: ${subtotal.toLocaleString()} Lekë\n`;
+            message += `Dërgimi: ${shippingCost.toLocaleString()} Lekë\n`;
+            
+            // Informacion për dërgesë falas
+            if (totalItems >= 2) {
+                message += `🎁 *DËRGESË FALAS* (për 2+ produkte)\n`;
+            }
+            
+            message += `*TOTALI: ${total.toLocaleString()} Lekë*\n`;
+            
+            // Metoda e pagesës
+            message += `\n💳 *METODA E PAGESËS*\n`;
+            message += `Cash on Delivery (Pagesa në dorëzim)\n`;
+            
+            // Shënime
+            if (formData.notes && formData.notes.trim() !== '') {
+                message += `\n📝 *SHËNIME*\n`;
+                message += `${formData.notes}\n`;
+            }
+            
+            // Data
+            message += `\n📅 *DATA*\n`;
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('sq-AL');
+            const timeStr = now.toLocaleTimeString('sq-AL', {hour: '2-digit', minute:'2-digit'});
+            message += `${dateStr} - ${timeStr}\n`;
+            
+            console.log("Mesazhi për WhatsApp:", message);
+            
+            // Kodojmë mesazhin për URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Numri i WhatsApp (ZËVENDËSOJE ME NUMRIN TËND!)
+            const phoneNumber = "355694707750"; // <-- NDRYSHO KËTË NUMËR!
+            
+            // Krijojmë URL-në e WhatsApp
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            console.log("URL për WhatsApp:", whatsappURL);
+            
+            // Hapim WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Tregojmë një njoftim
+            alert('WhatsApp po hapet... Ju lutem dërgoni mesazhin për të konfirmuar porosinë.');
+        }
+        
+        // Validimi i formës
+        function validateForm() {
+            let isValid = true;
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('has-error');
+            });
+            
+            // Validate full name
+            const fullName = document.getElementById('full-name').value.trim();
+            if (!fullName) {
+                document.getElementById('nameError').style.display = 'block';
+                document.querySelector('#full-name').parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            // Validate phone
+            const phone = document.getElementById('phone').value.trim();
+            const phoneRegex = /^[+0-9\s\-\(\)]{8,}$/;
+            if (!phone || !phoneRegex.test(phone)) {
+                document.getElementById('phoneError').style.display = 'block';
+                document.querySelector('#phone').parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            // Validate email if provided
+           
+            
+            // Validate city
+            const city = document.getElementById('city').value;
+            if (!city) {
+                document.getElementById('cityError').style.display = 'block';
+                document.querySelector('#city').parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            // Validate address
+            const address = document.getElementById('address').value.trim();
+            if (!address) {
+                document.getElementById('addressError').style.display = 'block';
+                document.querySelector('#address').parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+        
+        // Marrja e të dhënave nga forma
+        function getFormData() {
+            const form = document.getElementById('checkout-form');
+            const formData = new FormData(form);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            return data;
+        }
+        
+        // Validimi i email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>

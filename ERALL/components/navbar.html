@@ -1,0 +1,324 @@
+<nav class="navbar">
+    <div class="container nav-container">
+        <a href="index.html" class="logo">ERALL</a>
+        
+        <!-- Search Bar për desktop -->
+        <div class="desktop-search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="navbar-search" placeholder="Kërko parfume..." autocomplete="off">
+                <div class="search-results-dropdown" id="search-results-dropdown"></div>
+            </div>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Kryefaqja</a></li>
+            <li><a href="shop.html">Dyqani</a></li>
+        </ul>
+        
+        <div class="nav-icons">
+            <!-- Search icon për mobile -->
+            <div class="mobile-search-icon" onclick="toggleMobileSearch()">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count">0</span>
+            </div>
+            
+    
+    <!-- Search Bar për Mobile -->
+    <div class="mobile-search-container" id="mobileSearchContainer">
+        <div class="mobile-search-box">
+            <input type="text" id="mobile-search" placeholder="Kërko parfume..." autocomplete="off">
+            <button class="search-close" onclick="toggleMobileSearch()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mobile-search-results" id="mobile-search-results"></div>
+        </div>
+    </div>
+</nav>
+
+<style>
+    /* Desktop Search Styles */
+    .desktop-search-container {
+        flex: 1;
+        max-width: 400px;
+        margin: 0 2rem;
+        position: relative;
+    }
+    
+    .search-box {
+        position: relative;
+        width: 100%;
+    }
+    
+    .search-box i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-gold);
+        font-size: 1rem;
+        z-index: 2;
+    }
+    
+    #navbar-search {
+        width: 100%;
+        padding: 12px 15px 12px 45px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 30px;
+        color: var(--color-white);
+        font-family: var(--font-sans);
+        font-size: 0.9rem;
+        transition: var(--transition);
+    }
+    
+    #navbar-search:focus {
+        outline: none;
+        border-color: var(--color-gold);
+        background-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+    
+    #navbar-search::placeholder {
+        color: var(--color-beige);
+        opacity: 0.7;
+    }
+    
+    /* Search Results Dropdown */
+    .search-results-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-dark);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 10px;
+        margin-top: 5px;
+        max-height: 400px;
+        overflow-y: auto;
+        display: none;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    
+    .search-results-dropdown.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .search-result-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .search-result-item:hover {
+        background-color: rgba(212, 175, 55, 0.1);
+    }
+    
+    .search-result-item:last-child {
+        border-bottom: none;
+    }
+    
+    .search-result-image {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        margin-right: 15px;
+        background-color: var(--color-black);
+        border-radius: 5px;
+        padding: 5px;
+    }
+    
+    .search-result-info {
+        flex: 1;
+    }
+    
+    .search-result-name {
+        font-weight: 600;
+        color: var(--color-white);
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+    }
+    
+    .search-result-category {
+        color: var(--color-gold);
+        font-size: 0.8rem;
+        background-color: rgba(212, 175, 55, 0.1);
+        padding: 3px 8px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+    
+    .search-result-price {
+        color: var(--color-gold);
+        font-weight: 600;
+        margin-left: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .no-search-results {
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--color-beige);
+    }
+    
+    .no-search-results i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: var(--color-gold);
+        opacity: 0.5;
+    }
+    
+    .search-view-all {
+        text-align: center;
+        padding: 15px;
+        background-color: rgba(212, 175, 55, 0.1);
+    }
+    
+    .search-view-all a {
+        color: var(--color-gold);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    /* Mobile Search Styles */
+    .mobile-search-icon {
+        display: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--color-white);
+        padding: 8px;
+    }
+    
+    .mobile-search-container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-black);
+        padding: 15px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        z-index: 999;
+    }
+    
+    .mobile-search-container.active {
+        display: block;
+    }
+    
+    .mobile-search-box {
+        position: relative;
+    }
+    
+    #mobile-search {
+        width: 100%;
+        padding: 12px 50px 12px 15px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 25px;
+        color: var(--color-white);
+        font-size: 1rem;
+    }
+    
+    .search-close {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--color-gold);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+    }
+    
+    .mobile-search-results {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-top: 10px;
+        border-radius: 10px;
+        background-color: var(--color-dark);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        display: none;
+    }
+    
+    .mobile-search-results.active {
+        display: block;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+        .desktop-search-container {
+            display: none;
+        }
+        
+        .mobile-search-icon {
+            display: block;
+        }
+    }
+    
+    @media (min-width: 993px) {
+        .mobile-search-container {
+            display: none !important;
+        }
+    }
+</style>
+
+<script>
+    // Mobile menu toggle (mbani këtë pjesë)
+    document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isVisible = navLinks.style.display === 'flex';
+                navLinks.style.display = isVisible ? 'none' : 'flex';
+                
+                if (!isVisible && window.innerWidth <= 992) {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.right = '0';
+                    navLinks.style.background = 'var(--color-dark)';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.borderTop = '1px solid rgba(212, 175, 55, 0.2)';
+                    navLinks.style.zIndex = '1000';
+                }
+            });
+        }
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.background = 'transparent';
+                navLinks.style.padding = '0';
+                navLinks.style.borderTop = 'none';
+                document.getElementById('mobileSearchContainer').classList.remove('active');
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+        
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    });
+</script>

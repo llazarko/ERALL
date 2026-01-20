@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERALL - Inspired by Luxury </title>
+    <link rel="icon" href="images/img.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="ERALL - Parfume luksoze të cilësië premium. Përjetoni luksin me çmim të arsyeshëm.">
+</head>
+<body>
+    <!-- Navbar i ngarkuar dinamisht -->
+    <div id="navbar-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-logo">ERALL</h1>
+            <p class="hero-subtitle">Luxury Inspired</p>
+            
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn btn-primary">Eksploro Koleksionin</a>
+            </div>
+        </div>
+        
+        <!-- Perfume Bottle Image -->
+        <img src="images/img.png" alt="ERALL Perfume Bottle" class="perfume-bottle">
+        
+        <!-- Smoke Animation Background -->
+        <div class="smoke"></div>
+    </section>
+
+
+    <!-- Collections Section -->
+    <section class="section" id="collections">
+        <div class="container">
+            <h2 class="section-title">Koleksionet <span>Tona</span></h2>
+            <p class="section-subtitle">Eksploroni koleksionet tona të përzgjedhura me kujdes për të kënaqur çdo preferencë dhe rast.</p>
+            
+            <div class="collections-grid">
+                <div class="collection-card" onclick="window.location.href='shop.html?category=meshkuj'">
+                    <img src="images/menswlp.webp" alt="Men's Fragrances" class="collection-image">
+                    <div class="collection-content">
+                        <h3 class="collection-title">Parfume për Meshkuj</h3>
+                        <button class="btn btn-secondary btn-small">Shiko Koleksionin</button>
+                    </div>
+                </div>
+                
+                <div class="collection-card" onclick="window.location.href='shop.html?category=femra'">
+                    <img src="images/womenwlp.jpg" alt="Women's Fragrances" class="collection-image">
+                    <div class="collection-content">
+                        <h3 class="collection-title">Parfume për Femra</h3>
+                        <button class="btn btn-secondary btn-small">Shiko Koleksionin</button>
+                    </div>
+                </div>
+                
+                <div class="collection-card" onclick="window.location.href='shop.html?category=unisex'">
+                    <img src="images/bsllwlp.jpg" alt="Unisex Fragrances" class="collection-image">
+                    <div class="collection-content">
+                        <h3 class="collection-title">Unisex</h3>
+                        <button class="btn btn-secondary btn-small">Shiko Koleksionin</button>
+                    </div>
+                </div>
+
+                <div class="collection-card" onclick="window.location.href='shop.html?category=set'">
+                    <img src="images/set.jpg" alt="Perfume Set" class="collection-image">
+                    <div class="collection-content">
+                        <h3 class="collection-title">Perfume Set</h3>
+                        <button class="btn btn-secondary btn-small">Shiko Koleksionin</button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers Section -->
+    <section class="section bestsellers" id="bestsellers">
+        <div class="container">
+            <h2 class="section-title">New-<span>Collection</span></h2>
+            <p class="section-subtitle">Parfumet më të reja.</p>
+            
+            <div class="products-grid" id="bestsellers-container">
+                <!-- Bestseller produktet do të ngarkohen me JavaScript -->
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="shop.html?category=all" class="btn btn-secondary">Shiko Të Gjith Koleksionin</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Brand Preview -->
+    <section class="section about-preview">
+        <div class="container">
+            <div class="about-preview-content">
+                <div class="about-preview-image">
+                    <img src="images/img.png" alt="Perfume Making Process">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer i ngarkuar dinamisht -->
+    <div id="footer-container"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-bag"></i> Shporta Juaj</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="free-shipping-banner" id="freeShippingBanner" style="display: none;">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Dërgesë FALAS për cdo porosi!</span>
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span><strong>TOTALI:</strong></span>
+                <span class="cart-total-amount" id="cartTotal">0 Lekë</span>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn btn-primary" onclick="checkout()">
+                    <i class="fas fa-lock"></i> Vazhdo me Pagesën
+                </button>
+                <button class="btn btn-secondary" onclick="toggleCart()">
+                    <i class="fas fa-arrow-left"></i> Vazhdo Blerjen
+                </button>
+            </div>
+            
+            <div class="payment-methods">
+                <small><i class="fas fa-credit-card"></i> Paguani në dorëzim të porosisë </small>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .payment-methods {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-beige);
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .payment-methods i {
+            color: var(--color-gold);
+            margin-right: 5px;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Ngarko komponentët
+        loadComponent('navbar-container', 'components/navbar.html');
+        loadComponent('footer-container', 'components/footer.html');
+        
+        // Ngarko bestsellers në faqen kryesore
+        document.addEventListener('DOMContentLoaded', function() {
+            const bestsellers = getBestsellerProducts();
+            displayProducts(bestsellers, 'bestsellers-container');
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="product-title">Produkti - ERALL</title>
+    <link rel="icon" href="images/img.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Product Page -->
+    <main class="product-page">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs" id="breadcrumbs">
+                <a href="index.html">Kryefaqja</a> > 
+                <a href="shop.html">Dyqani</a> > 
+                <span id="product-category">Produkti</span>
+            </div>
+            
+            <!-- Product Detail -->
+            <div class="product-detail">
+                <!-- Product Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="product-main-image" src="" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-images">
+                        <!-- Thumbnails will be loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Product Info -->
+                <div class="product-info">
+                    <h1 id="product-name">Emri i Produktit</h1>
+                    <p class="product-inspired" id="product-inspired"></p>
+                    
+                    <div class="product-category-badge" id="product-category-badge"></div>
+                    
+                    <div class="product-rating" id="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    
+                    <div class="product-price" id="product-price">0 Lekë</div>
+                    
+                    <!-- Product Notes -->
+                    <div class="product-notes-detailed">
+                        <h3>Notat e Aromës:</h3>
+                        <div class="notes-grid" id="product-notes">
+                            <!-- Notes will be loaded by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="product-description">
+                        <h3>Përshkrimi</h3>
+                        <p id="product-description"></p>
+                    </div>
+
+                    <!-- Longevity & Projection -->
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <h4>Zgjatja:</h4>
+                            <div class="spec-bar">
+                                <div class="spec-fill" id="longevity-bar" style="width: 80%"></div>
+                            </div>
+                            <span id="longevity-text">12-24 orë</span>
+                        </div>
+                        <div class="spec-item">
+                            <h4>Projeksioni:</h4>
+                            <div class="spec-bar">
+                                <div class="spec-fill" id="projection-bar" style="width: 70%"></div>
+                            </div>
+                            <span id="projection-text">Mesatar</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Add to Cart -->
+                    <div class="add-to-cart-section">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" onclick="changeQuantity(-1)">-</button>
+                            <span id="product-quantity">1</span>
+                            <button class="qty-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                        <button class="btn btn-primary" onclick="addProductToCart()" style="flex: 1;">
+                            <i class="fas fa-shopping-bag"></i> Shto në Shportë
+                        </button>
+                        <button class="btn btn-secondary" onclick="buyNow()">
+                            <i class="fas fa-bolt"></i> Blej Tani
+                        </button>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-header">
+            <h3>Shporta Juaj</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totali:</span>
+                <span class="cart-total-amount" id="cartTotal">0 Lekë</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="checkout()">Vazhdo me Porosin</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Produkti u shtua në shportë!
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // Ngarko komponentët
+        loadComponent('navbar-container', 'components/navbar.html');
+        loadComponent('footer-container', 'components/footer.html');
+        
+        // Ngarko produktin bazuar në ID në URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || 1;
+            loadProduct(productId);
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

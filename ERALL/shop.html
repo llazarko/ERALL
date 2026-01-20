@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERALL Luxury Fragrances</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/img.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Shfleto koleksionin tonë të plotë të parfumeve luksoze të frymëzuara. Parfume për meshkuj, femra dhe unisex.">
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-container"></div>
+
+    <!-- Shop Page -->
+    <main class="shop-page">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="index.html">Kryefaqja</a> > 
+                <span></span>Koleksioni <span>Ynë
+            </div>
+            
+            <div class="shop-header">
+                <div class="shop-stats">
+                    <span id="product-count">0 Produkte</span>
+                </div>
+            </div>
+            
+            <!-- Shop Filter -->
+            <div class="shop-filter">
+                <button class="filter-btn active" data-category="all">Të Gjitha</button>
+                <button class="filter-btn" data-category="meshkuj">Për Meshkuj</button>
+                <button class="filter-btn" data-category="femra">Për Femra</button>
+                <button class="filter-btn" data-category="unisex">Unisex</button>
+                <button class="filter-btn" data-category="set">Set Parfumesh</button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Produktet do të ngarkohen me JavaScript -->
+            </div>
+            
+            <!-- No Products Message -->
+            <div class="no-products" id="no-products" style="display: none;">
+                <i class="fas fa-search" style="font-size: 3rem; color: var(--color-gold); margin-bottom: 1rem;"></i>
+                <h3>Nuk u gjetën produkte</h3>
+                <p>Provoni një kategori tjetër ose kthuni te të gjitha produktet.</p>
+                <button class="btn btn-secondary" onclick="filterProducts('all')">Shiko Të Gjitha</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay">
+        <div class="cart-header">
+            <h3>Shporta Juaj</h3>
+            <button class="cart-close" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here by JavaScript -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Totali:</span>
+                <span class="cart-total-amount" id="cartTotal">0 Lekë</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" onclick="checkout()">Vazhdo me checkout</button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Produkti u shtua në shportë!
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/shop.js"></script>
+    <script>
+        // Ngarko komponentët
+        loadComponent('navbar-container', 'components/navbar.html');
+        loadComponent('footer-container', 'components/footer.html');
+        
+        // Ngarko produktet bazuar në URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'all';
+            filterProducts(category);
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
