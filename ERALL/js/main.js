@@ -12,25 +12,6 @@ function loadComponent(containerId, filePath) {
         .catch(error => console.error('Error loading component:', error));
 }
 
-// Update cart count from localStorage
-function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem('aromexa-cart')) || [];
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.querySelectorAll('.cart-count').forEach(el => {
-        el.textContent = count;
-    });
-}
-
-// Get cart from localStorage
-function getCart() {
-    return JSON.parse(localStorage.getItem('aromexa-cart')) || [];
-}
-
-// Save cart to localStorage
-function saveCart(cart) {
-    localStorage.setItem('aromexa-cart', JSON.stringify(cart));
-}
-
 // Toggle cart sidebar
 function toggleCart() {
     const cartOverlay = document.getElementById('cartOverlay');
@@ -41,54 +22,6 @@ function toggleCart() {
     }
 }
 
-// Update cart display
-function updateCartDisplay() {
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    if (!cartItems || !cartTotal) return;
-    
-    const cart = getCart();
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p style="text-align: center; color: var(--color-beige);">Shporta juaj është e zbrazët</p>';
-        cartTotal.textContent = '0 Lekë';
-        return;
-    }
-    
-    let total = 0;
-    let itemsHTML = '';
-    
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        
-        itemsHTML += `
-            <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                <div class="cart-item-details">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-price">${item.price.toLocaleString()} Lekë × ${item.quantity}</div>
-                </div>
-                <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        `;
-    });
-    
-    cartItems.innerHTML = itemsHTML;
-    cartTotal.textContent = `${total.toLocaleString()} Lekë`;
-}
-
-// Remove from cart
-function removeFromCart(productId) {
-    let cart = getCart();
-    cart = cart.filter(item => item.id !== productId);
-    saveCart(cart);
-    updateCartCount();
-    updateCartDisplay();
-}
 
 // Show notification
 function showNotification(message, type = 'success') {
@@ -136,39 +69,6 @@ function createWhatsAppOrder(cart, totalAmount) {
     message += "Ju lutemi të na dergoni Emër, Mbiemer, Qytetin dhe Adresën për përfundimin e porosisë.";
     
     return encodeURIComponent(message);
-}
-
-// Checkout function - Pagesa direkte pa formular
-function checkout() {
-    const cart = getCart();
-    
-    if (cart.length === 0) {
-        showNotification('Shporta juaj është e zbrazët!', 'error');
-        return;
-    }
-    
-    // Calculate total amount
-    const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    // Create order summary
-    let orderSummary = "Faleminderit për porosinë tuaj! 📦\n\n";
-    orderSummary += "Porosia juaj është pranuar dhe do të përpunohet menjëherë.\n\n";
-    orderSummary += "📋 *Përmbledhja e porosisë:*\n";
-    
-    cart.forEach((item, index) => {
-        orderSummary += `${index + 1}. ${item.name} - ${item.quantity} × ${item.price.toLocaleString()} Lekë\n`;
-    });
-    
-    orderSummary += `\n💰 *Shuma totale: ${totalAmount.toLocaleString()} Lekë*\n\n`;
-    orderSummary += "📞 *Hapat e ardhshëm:*\n";
-    orderSummary += "1. Një përfaqësues do t'ju kontaktojë brenda 30 minutave për të konfirmuar porosinë\n";
-    orderSummary += "2. Do të vendosni mënyrën e pagesës (në dorëzim ose bankë)\n";
-    orderSummary += "3. Porosia do të dërgohet brenda 24 orëve\n";
-    orderSummary += "4. Do të merrni numrin e gjurmimit të dërgesës\n\n";
-    orderSummary += "Faleminderit që zgjodhët Aromexa! ❤️";
-    
-    // Show order confirmation modal
-    showOrderConfirmation(orderSummary, cart, totalAmount);
 }
 
 // Show order confirmation modal
