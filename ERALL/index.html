@@ -14,8 +14,18 @@
     <!-- Navbar i ngarkuar dinamisht -->
     <div id="navbar-container"></div>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Hero Section with Video Background -->
+    <section class="hero hero-video">
+        <!-- Video Background -->
+        <video class="hero-video-bg" autoplay loop muted playsinline>
+            <source src="/images/video/vid3.mp4" type="video/mp4">
+            <!-- Fallback image nëse video nuk ngarkohet -->
+            <img src="images/img.png" alt="Background" class="hero-video-fallback">
+        </video>
+        
+        <!-- Overlay për tekst -->
+        <div class="hero-overlay"></div>
+        
         <div class="hero-content">
             <h1 class="hero-logo">ERALL</h1>
             <p class="hero-subtitle">Luxury Inspired</p>
@@ -24,12 +34,6 @@
                 <a href="shop.html" class="btn btn-primary">Eksploro Koleksionin</a>
             </div>
         </div>
-        
-        <!-- Perfume Bottle Image -->
-        <img src="images/img.png" alt="ERALL Perfume Bottle" class="perfume-bottle">
-        
-        <!-- Smoke Animation Background -->
-        <div class="smoke"></div>
     </section>
 
 
