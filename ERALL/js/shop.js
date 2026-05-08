@@ -60,3 +60,41 @@ function initShop() {
 if (window.location.pathname.includes('shop.html')) {
     document.addEventListener('DOMContentLoaded', initShop);
 }
+
+// Toggle filter menu për mobile
+function toggleFilterMenu() {
+    const wrapper = document.querySelector('.filter-wrapper');
+    if (wrapper) {
+        wrapper.classList.toggle('active');
+    }
+}
+
+// Mbyll menunë e filterit kur klikohet një buton (në mobile)
+function closeFilterMenuOnMobile() {
+    if (window.innerWidth <= 768) {
+        const wrapper = document.querySelector('.filter-wrapper');
+        if (wrapper) {
+            wrapper.classList.remove('active');
+        }
+    }
+}
+
+// Modifiko funksionin ekzistues filterProducts
+// (Shto thirrjen për të mbyllur menunë)
+const originalFilterProducts = filterProducts;
+filterProducts = function(category) {
+    originalFilterProducts(category);
+    closeFilterMenuOnMobile();
+};
+
+// Mbyll menunë kur klikohet jashtë (në mobile)
+document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 768) {
+        const wrapper = document.querySelector('.filter-wrapper');
+        const filterHeader = document.querySelector('.filter-header');
+        
+        if (wrapper && filterHeader && !filterHeader.contains(e.target)) {
+            wrapper.classList.remove('active');
+        }
+    }
+});
