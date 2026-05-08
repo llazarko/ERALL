@@ -29,13 +29,29 @@
                 </div>
             </div>
             
-            <!-- Shop Filter -->
-            <div class="shop-filter">
-                <button class="filter-btn active" data-category="all">Të Gjitha</button>
-                <button class="filter-btn" data-category="meshkuj">Për Meshkuj</button>
-                <button class="filter-btn" data-category="femra">Për Femra</button>
-                <button class="filter-btn" data-category="unisex">Unisex</button>
-                <button class="filter-btn" data-category="set">Set Parfumesh</button>
+            <!-- Shop Filter - Versioni i Përmirësuar -->
+            <div class="filter-wrapper">
+                <div class="filter-header" onclick="toggleFilterMenu()">
+                    <span><i class="fas fa-filter"></i> Filtro produktet</span>
+                    <i class="fas fa-chevron-down filter-arrow"></i>
+                </div>
+                <div class="shop-filter" id="shopFilterMenu">
+                    <button class="filter-btn active" data-category="all">
+                        <i class="fas fa-th-large"></i> Të Gjitha
+                    </button>
+                    <button class="filter-btn" data-category="meshkuj">
+                        <i class="fas fa-mars"></i> Për Meshkuj
+                    </button>
+                    <button class="filter-btn" data-category="femra">
+                        <i class="fas fa-venus"></i> Për Femra
+                    </button>
+                    <button class="filter-btn" data-category="unisex">
+                        <i class="fas fa-genderless"></i> Unisex
+                    </button>
+                    <button class="filter-btn" data-category="set">
+                        <i class="fas fa-box"></i> Set Parfumesh
+                    </button>
+                </div>
             </div>
             
             <!-- Products Grid -->
