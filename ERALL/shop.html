@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="sq">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="images/img.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500&display=swap" rel="stylesheet">
-    <meta name="description" content="Shfleto koleksionin tonë të plotë të parfumeve luksoze të frymëzuara. Parfume për meshkuj, femra dhe unisex.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@100;200;300;400;500&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="Shfleto koleksionin tonë të plotë të parfumeve luksoze të frymëzuara. Parfume për meshkuj, femra dhe unisex.">
 </head>
+
 <body>
     <!-- Navbar -->
     <div id="navbar-container"></div>
@@ -19,16 +24,16 @@
         <div class="container">
             <!-- Breadcrumbs -->
             <div class="breadcrumbs">
-                <a href="index.html">Kryefaqja</a> > 
+                <a href="index.html">Kryefaqja</a> >
                 <span></span>Koleksioni <span>Ynë
             </div>
-            
+
             <div class="shop-header">
                 <div class="shop-stats">
                     <span id="product-count">0 Produkte</span>
                 </div>
             </div>
-            
+
             <!-- Shop Filter - Versioni i Përmirësuar -->
             <div class="filter-wrapper">
                 <div class="filter-header" onclick="toggleFilterMenu()">
@@ -53,12 +58,12 @@
                     </button>
                 </div>
             </div>
-            
+
             <!-- Products Grid -->
             <div class="products-grid" id="products-container">
                 <!-- Produktet do të ngarkohen me JavaScript -->
             </div>
-            
+
             <!-- No Products Message -->
             <div class="no-products" id="no-products" style="display: none;">
                 <i class="fas fa-search" style="font-size: 3rem; color: var(--color-gold); margin-bottom: 1rem;"></i>
@@ -106,16 +111,16 @@
         // Ngarko komponentët
         loadComponent('navbar-container', 'components/navbar.html');
         loadComponent('footer-container', 'components/footer.html');
-        
+
         // Ngarko produktet bazuar në URL
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const category = urlParams.get('category') || 'all';
             filterProducts(category);
             updateCartCount();
         });
     </script>
- <style>
+    <style>
         :root {
             --chat-dark: #0a0a0a;
             --chat-darker: #050505;
@@ -142,14 +147,14 @@
             justify-content: center;
             cursor: pointer;
             z-index: 999999;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(212,175,55,0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(212, 175, 55, 0.4);
             transition: all 0.3s ease;
             animation: pulse-glow 2s infinite;
         }
 
         .chat-float-btn:hover {
             transform: scale(1.08);
-            box-shadow: 0 10px 30px rgba(212,175,55,0.4);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
         }
 
         .chat-float-btn i {
@@ -158,9 +163,17 @@
         }
 
         @keyframes pulse-glow {
-            0% { box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(212,175,55,0.4); }
-            70% { box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 12px rgba(212,175,55,0); }
-            100% { box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 0 rgba(212,175,55,0); }
+            0% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(212, 175, 55, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 12px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(212, 175, 55, 0);
+            }
         }
 
         /* Chat Widget - z-index më i lartë se gjithçka */
@@ -175,7 +188,7 @@
             backdrop-filter: blur(20px);
             border-radius: 28px;
             border: 1px solid var(--chat-border);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -249,7 +262,7 @@
 
         /* Butoni Close - i rregulluar për klikueshmëri */
         .chat-close {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: var(--chat-beige);
             font-size: 20px;
@@ -264,7 +277,7 @@
         }
 
         .chat-close:hover {
-            background: rgba(212,175,55,0.3);
+            background: rgba(212, 175, 55, 0.3);
             color: var(--chat-gold);
             transform: rotate(90deg);
         }
@@ -285,7 +298,7 @@
         }
 
         .chat-messages::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
 
@@ -319,7 +332,7 @@
 
         .bot .bubble {
             background: rgba(30, 30, 35, 0.95);
-            border: 1px solid rgba(212,175,55,0.25);
+            border: 1px solid rgba(212, 175, 55, 0.25);
             border-radius: 20px 20px 20px 4px;
             color: var(--chat-beige);
         }
@@ -343,10 +356,10 @@
             display: flex;
             gap: 5px;
             padding: 10px 16px;
-            background: rgba(30,30,35,0.9);
+            background: rgba(30, 30, 35, 0.9);
             border-radius: 20px;
             width: fit-content;
-            border: 1px solid rgba(212,175,55,0.25);
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
         .typing-indicator span {
@@ -357,12 +370,27 @@
             animation: typing 1.4s infinite;
         }
 
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-            30% { transform: translateY(-8px); opacity: 1; }
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            30% {
+                transform: translateY(-8px);
+                opacity: 1;
+            }
         }
 
         @keyframes fadeInUp {
@@ -370,6 +398,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -378,12 +407,12 @@
 
         /* Product Card */
         .chat-product-card {
-            background: rgba(20,20,25,0.98);
+            background: rgba(20, 20, 25, 0.98);
             border-radius: 16px;
             margin-top: 12px;
             margin-bottom: 8px;
             padding: 12px;
-            border: 1px solid rgba(212,175,55,0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             display: flex;
             gap: 12px;
             transition: 0.2s;
@@ -427,7 +456,7 @@
 
         .product-badge {
             display: inline-block;
-            background: rgba(212,175,55,0.2);
+            background: rgba(212, 175, 55, 0.2);
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.65rem;
@@ -443,7 +472,7 @@
         }
 
         .chat-btn-sm {
-            background: rgba(212,175,55,0.2);
+            background: rgba(212, 175, 55, 0.2);
             border: 1px solid var(--chat-gold);
             padding: 5px 12px;
             border-radius: 20px;
@@ -478,8 +507,8 @@
         }
 
         .quick-reply {
-            background: rgba(212,175,55,0.15);
-            border: 1px solid rgba(212,175,55,0.4);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             padding: 6px 14px;
             border-radius: 25px;
             font-size: 0.7rem;
@@ -495,37 +524,38 @@
 
         /* Input Area */
         .chat-input-area {
-    padding: 15px 20px;
-    background: rgba(10,10,10,0.98);
-    border-top: 1px solid var(--chat-border);
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-shrink: 0;
-}
+            padding: 15px 20px;
+            background: rgba(10, 10, 10, 0.98);
+            border-top: 1px solid var(--chat-border);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-shrink: 0;
+        }
 
-.chat-input-area input {
-    flex: 1;
-    background: rgba(30,30,35,0.9);
-    border: 1px solid var(--chat-border);
-    border-radius: 30px;
-    padding: 12px 18px;
-    color: var(--chat-white);
-    font-size: 0.85rem;
-    outline: none;
-    transition: 0.2s;
-}
+        .chat-input-area input {
+            flex: 1;
+            background: rgba(30, 30, 35, 0.9);
+            border: 1px solid var(--chat-border);
+            border-radius: 30px;
+            padding: 12px 18px;
+            color: var(--chat-white);
+            font-size: 0.85rem;
+            outline: none;
+            transition: 0.2s;
+        }
 
-/* RREGULLIMI PËR MOBILE - parandalon zoom-in automatik */
-@media (max-width: 768px) {
-    .chat-input-area input {
-        font-size: 16px !important; /* 16px është minimumi për të shmangur zoom-in në iOS */
-    }
-}
+        /* RREGULLIMI PËR MOBILE - parandalon zoom-in automatik */
+        @media (max-width: 768px) {
+            .chat-input-area input {
+                font-size: 16px !important;
+                /* 16px është minimumi për të shmangur zoom-in në iOS */
+            }
+        }
 
-.chat-input-area input:focus {
-    border-color: var(--chat-gold);
-}
+        .chat-input-area input:focus {
+            border-color: var(--chat-gold);
+        }
 
         .chat-send-btn {
             background: var(--chat-gold);
@@ -567,173 +597,232 @@
                 right: 15px;
                 bottom: 85px;
             }
-            
+
             .chat-float-btn {
                 width: 55px;
                 height: 55px;
                 bottom: 20px;
                 right: 20px;
             }
-            
+
             .chat-float-btn i {
                 font-size: 26px;
             }
         }
     </style>
-</head>
-<body>
+    </head>
 
-<div class="chat-float-btn" id="chatFloatBtn">
-    <i class="fas fa-gem"></i>
-</div>
+    <body>
 
-<div class="chat-widget" id="chatWidget">
-    <div class="chat-header">
-        <div class="chat-header-left">
-            <div class="chat-avatar">
-                <i class="fas fa-crown"></i>
+        <div class="chat-float-btn" id="chatFloatBtn">
+            <i class="fas fa-gem"></i>
+        </div>
+
+        <div class="chat-widget" id="chatWidget">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-avatar">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="chat-header-info">
+                        <h4>ERALL AI</h4>
+                        <p>Perfume Expert · Premium</p>
+                        <div class="api-status" id="apiStatus">✨ AI Online</div>
+                    </div>
+                </div>
+                <button class="chat-close" id="chatCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <div class="chat-header-info">
-                <h4>ERALL AI</h4>
-                <p>Perfume Expert · Premium</p>
-                <div class="api-status" id="apiStatus">✨ AI Online</div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Shkruani mesazhin tuaj..." autocomplete="off">
+                <button class="chat-send-btn" id="chatSendBtn">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
             </div>
         </div>
-        <button class="chat-close" id="chatCloseBtn">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div class="chat-messages" id="chatMessages"></div>
-    <div class="chat-input-area">
-        <input type="text" id="chatInput" placeholder="Shkruani mesazhin tuaj..." autocomplete="off">
-        <button class="chat-send-btn" id="chatSendBtn">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-    </div>
-</div>
 
-<script>
-    (function() {
-        const API_PROVIDER = 'GROQ';
-        const GROQ_API_KEY = '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';
-        
-        let chatHistory = [];
-        let chatMessages = [];
-        let isTyping = false;
-        
-        const messagesContainer = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendBtn = document.getElementById('chatSendBtn');
-        const floatBtn = document.getElementById('chatFloatBtn');
-        const closeBtn = document.getElementById('chatCloseBtn');
-        const widget = document.getElementById('chatWidget');
-        
-        // ============================================================
-        // FUNKSIONI PËR API (GROQ ose OPENROUTER)
-        // ============================================================
-        async function callAIAPI(userMessage, conversationHistory) {
-            const products = getProductsData();
-            if (products.length === 0) {
-                return { success: false, error: "No products found" };
-            }
-            
-            const productListStr = products.slice(0, 30).map(p => `
-ID: ${p.id} | ${p.name} | ${p.inspired} | ${p.price} Lekë | Nota: ${p.notes.slice(0,2).join(',')} | Longevity: ${p.longevity}%`).join('\n');
-            
-            const systemPrompt = `Ti je "ERALL AI", asistent për parfume. Rekomando produkte nga lista. Përdor format: **Numri. Emri** [ID: id] - çmimi\n-Përshkrim\n<<<PRODUCT_CARD>>>`;
-            
-            let apiUrl, headers, body;
-            
-            if (API_PROVIDER === 'GROQ') {
-                apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
-                headers = {
-                    'Authorization': `Bearer ${GROQ_API_KEY}`,
-                    'Content-Type': 'application/json'
-                };
-                body = {
-                    model: 'llama-3.3-70b-versatile',
-                    messages: [
-                        { role: 'system', content: systemPrompt + "\n\nProduktet:\n" + productListStr },
-                        ...conversationHistory,
-                        { role: 'user', content: userMessage }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 800
-                };
-            } else {
-                apiUrl = 'https://openrouter.ai/api/v1/chat/completions';
-                headers = {
-                    'Authorization': `Bearer ${GROQ_API_KEY}`,
-                    'Content-Type': 'application/json',
-                    'HTTP-Referer': window.location.origin
-                };
-                body = {
-                    model: 'meta-llama/llama-3.3-70b-instruct',
-                    messages: [
-                        { role: 'system', content: systemPrompt + "\n\nProduktet:\n" + productListStr },
-                        ...conversationHistory,
-                        { role: 'user', content: userMessage }
-                    ],
-                    temperature: 0.7,
-                    max_tokens: 800
-                };
-            }
-            
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: headers,
-                    body: JSON.stringify(body)
+        <script>
+            (function () {
+                const API_PROVIDER = 'GROQ';
+                const GROQ_API_KEY = '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';
+
+                let chatHistory = [];
+                let chatMessages = [];
+                let isTyping = false;
+
+                const messagesContainer = document.getElementById('chatMessages');
+                const chatInput = document.getElementById('chatInput');
+                const sendBtn = document.getElementById('chatSendBtn');
+                const floatBtn = document.getElementById('chatFloatBtn');
+                const closeBtn = document.getElementById('chatCloseBtn');
+                const widget = document.getElementById('chatWidget');
+
+                // ============================================================
+                // FUNKSIONI PËR API (GROQ)
+                // ============================================================
+                async function callAIAPI(userMessage, conversationHistory) {
+                    const products = getProductsData();
+                    if (products.length === 0) {
+                        return { success: false, error: "No products found" };
+                    }
+
+                    // Lista e produkteve për AI (më e detajuar)
+                    const productListStr = products.map(p => `
+ID: ${p.id} | Emri: ${p.name} | Brand: ${p.inspired} | Çmimi: ${p.price} Lekë | Nota: ${p.notes.join(', ')} | Longevity: ${p.longevity}% | Projeksioni: ${p.projection}% | Kategoria: ${p.categoryDisplay}`).join('\n');
+
+                    const systemPrompt = `Ti je "ERALL AI", asistent ekspert për parfume luksoze. Detyra jote është të rekomandosh produkte VETËM nga lista e mëposhtme.
+
+RREGULLA TË RIGOROZTA:
+1. Për ÇDO rekomandim, trego ID-në në format [ID: numri] MENJËHERË pas emrit të produktit.
+2. Pasi të kesh listuar të gjitha rekomandimet, në fund shto një rresht me fjalën: <<<PRODUCT_CARD>>>
+3. Rekomando 4-6 produkte për çdo pyetje.
+4. Përdor këtë strukturë për secilin produkt:
+   **Numri. Emri i Produktit** [ID: id] - Çmimi Lekë
+   - Arsyeja pse përshtatet (1 rresht)
+
+SHEMBULL I SAKTË:
+**1. Bleu de Chanel** [ID: 7] - 5990 Lekë
+- Fresh dhe elegant, longevity 80%, perfekt për verë.
+
+**2. Y EDT** [ID: 17] - 5490 Lekë
+- Energjik dhe i freskët, ideal për përdorim ditor.
+
+<<<PRODUCT_CARD>>>
+
+Përgjigju gjithmonë në shqip, ton profesional por mikpritës. Mos shto tekst jashtë këtij formati.
+
+LISTA E PRODUKTEVE:
+${productListStr}`;
+
+                    try {
+                        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${GROQ_API_KEY}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                model: 'llama-3.3-70b-versatile',
+                                messages: [
+                                    { role: 'system', content: systemPrompt },
+                                    ...conversationHistory,
+                                    { role: 'user', content: userMessage }
+                                ],
+                                temperature: 0.6,
+                                max_tokens: 1200  // Rritur për më shumë produkte
+                            })
+                        });
+
+                        if (!response.ok) throw new Error(`API status ${response.status}`);
+                        const data = await response.json();
+                        const aiResponse = data.choices[0].message.content;
+
+                        const statusEl = document.getElementById('apiStatus');
+                        if (statusEl) {
+                            statusEl.innerHTML = '✨ AI Online';
+                            statusEl.style.color = '#4CAF50';
+                        }
+
+                        return { success: true, response: aiResponse };
+                    } catch (error) {
+                        console.error('API error:', error);
+                        const statusEl = document.getElementById('apiStatus');
+                        if (statusEl) {
+                            statusEl.innerHTML = '⚠️ Fallback Mode';
+                            statusEl.style.color = '#ffc107';
+                        }
+                        return { success: false, error: error.message };
+                    }
+                }
+
+                function getProductsData() {
+                    if (typeof products !== 'undefined' && Array.isArray(products)) {
+                        return products;
+                    }
+                    return [];
+                }
+
+                // ============================================================
+                // FALLBACK LOGJIKA (nëse API dështon)
+                // ============================================================
+                function getFallbackRecommendations(userMessage) {
+                    const products = getProductsData();
+                    if (products.length === 0) {
+                        return "Përshëndetje! 🎯\n\nUnë jam asistenti i ERALL. Për të marrë rekomandime, sigurohu që faqja të jetë ngarkuar plotësisht.\n\n🎀 **ERALL** - Luks i vërtetë me çmim të arsyeshëm.";
+                    }
+
+                    const lowerMsg = userMessage.toLowerCase();
+                    let filtered = [...products];
+
+                    if (lowerMsg.includes('verë') || lowerMsg.includes('summer') || lowerMsg.includes('fresh')) {
+                        filtered = filtered.filter(p => {
+                            const notes = p.notes.join(' ').toLowerCase();
+                            return notes.includes('fresh') || notes.includes('citrus') || notes.includes('bergamot');
+                        });
+                    }
+                    if (lowerMsg.includes('dimër') || lowerMsg.includes('winter')) {
+                        filtered = filtered.filter(p => {
+                            const notes = p.notes.join(' ').toLowerCase();
+                            return notes.includes('sweet') || notes.includes('vanilla') || notes.includes('spicy');
+                        });
+                    }
+                    if (lowerMsg.includes('longevity') || lowerMsg.includes('zgjat')) {
+                        filtered = filtered.filter(p => p.longevity >= 80);
+                    }
+                    if (lowerMsg.includes('buxhet') || lowerMsg.match(/\d+/)) {
+                        const budgetMatch = lowerMsg.match(/(\d+)/);
+                        if (budgetMatch) {
+                            const budget = parseInt(budgetMatch[0]);
+                            filtered = filtered.filter(p => p.price <= budget + 500);
+                        }
+                    }
+
+                    // Gjithmonë merr të paktën 5 produkte nëse ka
+                    filtered = filtered.slice(0, 6);
+
+                    let response = "🎯 **Rekomandimet e mia për ty** 🎯\n\n";
+                    filtered.forEach((p, idx) => {
+                        response += `**${idx + 1}. ${p.name}** [ID: ${p.id}] - ${p.price.toLocaleString()} Lekë\n`;
+                        response += `- ${p.notes.slice(0, 2).join(', ')}. Longevity ${p.longevity}%.\n\n`;
+                    });
+                    response += `<<<PRODUCT_CARD>>>`;
+                    return response;
+                }
+
+                // ============================================================
+                // RREGULLI I RI: PA SCROLL AUTOMATIK + PARSIM I PLOTË I ID-ve
+                // ============================================================
+                let userScrolledManually = false;
+
+                messagesContainer.addEventListener('scroll', () => {
+                    userScrolledManually = true;
                 });
-                
-                if (!response.ok) throw new Error(`API status ${response.status}`);
-                const data = await response.json();
-                return { success: true, response: data.choices[0].message.content };
-            } catch (error) {
-                console.error('API error:', error);
-                return { success: false, error: error.message };
-            }
-        }
-        
-        function getProductsData() {
-            if (typeof products !== 'undefined' && Array.isArray(products)) {
-                return products;
-            }
-            return [];
-        }
-        
-        // ============================================================
-        // RREGULLI I RI: PA SCROLL AUTOMATIK!
-        // ============================================================
-        // Vetëm regjistro pozicionin e scroll-it, por mos e ndrysho kurrë automatikisht
-        let userScrolledManually = false;
-        
-        messagesContainer.addEventListener('scroll', () => {
-            userScrolledManually = true;
-        });
-        
-        // Funksioni për të shtuar mesazh - PA FORCUAR SCROLL
-        function addMessage(text, sender, productCardData = null) {
-            const messageObj = { text, sender, timestamp: new Date(), productCard: productCardData };
-            chatMessages.push(messageObj);
-            
-            if (sender === 'user') {
-                chatHistory.push({ role: 'user', content: text });
-            }
-            
-            renderMessage(messageObj);
-            // ⚠️ NUK THIRRET MË smartScrollToBottom() - lëre përdoruesin të lexojë ku do
-        }
-        
-        function renderMessage(msg) {
-            const div = document.createElement('div');
-            div.className = `message ${msg.sender}`;
-            const timeStr = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
-            
-            let content = `<div class="bubble">${(msg.text || '').replace(/\n/g, '<br>')}</div>`;
-            
-            if (msg.productCard) {
-                content += `
+
+                function addMessage(text, sender, productCardData = null) {
+                    const messageObj = { text, sender, timestamp: new Date(), productCard: productCardData };
+                    chatMessages.push(messageObj);
+
+                    if (sender === 'user') {
+                        chatHistory.push({ role: 'user', content: text });
+                    } else if (sender === 'bot' && !productCardData && text && text.length > 0) {
+                        // Ruaj vetëm përgjigjet pa kartela për historikun
+                        chatHistory.push({ role: 'assistant', content: text.substring(0, 800) });
+                    }
+
+                    renderMessage(messageObj);
+                }
+
+                function renderMessage(msg) {
+                    const div = document.createElement('div');
+                    div.className = `message ${msg.sender}`;
+                    const timeStr = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                    let content = `<div class="bubble">${(msg.text || '').replace(/\n/g, '<br>')}</div>`;
+
+                    if (msg.productCard) {
+                        content += `
                     <div class="chat-product-card">
                         <img src="${msg.productCard.image || 'images/comingsoon.avif'}" onerror="this.src='images/comingsoon.avif'">
                         <div class="chat-product-info">
@@ -747,142 +836,194 @@ ID: ${p.id} | ${p.name} | ${p.inspired} | ${p.price} Lekë | Nota: ${p.notes.sli
                         </div>
                     </div>
                 `;
-            }
-            
-            content += `<div class="message-time">${timeStr}</div>`;
-            div.innerHTML = content;
-            messagesContainer.appendChild(div);
-        }
-        
-        function showTyping() {
-            if (isTyping) return;
-            isTyping = true;
-            const typingDiv = document.createElement('div');
-            typingDiv.className = 'message bot typing-message';
-            typingDiv.id = 'typingIndicator';
-            typingDiv.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
-            messagesContainer.appendChild(typingDiv);
-            // Nuk bëjmë scroll - lëre përdoruesin ku është
-        }
-        
-        function hideTyping() {
-            const typingEl = document.getElementById('typingIndicator');
-            if (typingEl) typingEl.remove();
-            isTyping = false;
-        }
-        
-        async function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            
-            addMessage(text, 'user');
-            chatInput.value = '';
-            
-            showTyping();
-            
-            const apiResult = await callAIAPI(text, chatHistory.slice(-10));
-            
-            hideTyping();
-            
-            if (apiResult.success && apiResult.response) {
-                const parts = apiResult.response.split(/<<<PRODUCT_CARD>>>/);
-                
-                let fullResponseHtml = "";
-                const productIdsToShow = [];
-                
-                for (let i = 0; i < parts.length; i++) {
-                    let part = parts[i].trim();
-                    if (part) {
-                        fullResponseHtml += part;
-                        const idMatch = part.match(/\[ID:\s*(\d+)\]/i);
-                        if (idMatch) {
-                            productIdsToShow.push(parseInt(idMatch[1]));
+                    }
+
+                    content += `<div class="message-time">${timeStr}</div>`;
+                    div.innerHTML = content;
+                    messagesContainer.appendChild(div);
+                }
+
+                function showTyping() {
+                    if (isTyping) return;
+                    isTyping = true;
+                    const typingDiv = document.createElement('div');
+                    typingDiv.className = 'message bot typing-message';
+                    typingDiv.id = 'typingIndicator';
+                    typingDiv.innerHTML = `<div class="typing-indicator"><span></span><span></span><span></span></div>`;
+                    messagesContainer.appendChild(typingDiv);
+                }
+
+                function hideTyping() {
+                    const typingEl = document.getElementById('typingIndicator');
+                    if (typingEl) typingEl.remove();
+                    isTyping = false;
+                }
+
+                async function sendMessage() {
+                    const text = chatInput.value.trim();
+                    if (!text) return;
+
+                    addMessage(text, 'user');
+                    chatInput.value = '';
+
+                    showTyping();
+
+                    const apiResult = await callAIAPI(text, chatHistory.slice(-10));
+
+                    hideTyping();
+
+                    let aiResponseText = "";
+                    if (apiResult.success && apiResult.response) {
+                        aiResponseText = apiResult.response;
+                    } else {
+                        aiResponseText = getFallbackRecommendations(text);
+                    }
+
+                    // ========================================================
+                    // PARSIM I PLOTË: Nxjerr të GJITHA ID-të nga përgjigja
+                    // ========================================================
+                    // 1. Nxjerr të gjitha ID-të duke kërkuar [ID: numri]
+                    const allIds = [];
+                    const idRegex = /\[ID:\s*(\d+)\]/gi;
+                    let match;
+                    while ((match = idRegex.exec(aiResponseText)) !== null) {
+                        const id = parseInt(match[1]);
+                        if (!allIds.includes(id)) {
+                            allIds.push(id);
                         }
                     }
-                    if (i < parts.length - 1) fullResponseHtml += "\n\n";
-                }
-                
-                if (fullResponseHtml.trim()) {
-                    addMessage(fullResponseHtml, 'bot');
-                }
-                
-                const products = getProductsData();
-                for (const productId of productIdsToShow) {
-                    const product = products.find(p => p.id === productId);
-                    if (product) {
-                        addMessage('', 'bot', product);
-                        await new Promise(r => setTimeout(r, 50));
+
+                    // 2. Nëse nuk ka ID, provo të kërkosh numra pas fjalës "ID" ose thjesht numra të izoluar?
+                    if (allIds.length === 0) {
+                        // Fallback: kërko çdo numër që mund të jetë ID (1-50)
+                        const numRegex = /\b([1-9][0-9]?)\b/g;
+                        while ((match = numRegex.exec(aiResponseText)) !== null) {
+                            const id = parseInt(match[1]);
+                            if (id >= 1 && id <= 50 && !allIds.includes(id)) {
+                                allIds.push(id);
+                            }
+                        }
                     }
+
+                    // 3. Përgatit tekstin pa ndarësit <<<PRODUCT_CARD>>>
+                    let cleanText = aiResponseText.replace(/<<<PRODUCT_CARD>>>/g, '');
+                    // Heq linjat e zbrazëta të tepërta
+                    cleanText = cleanText.replace(/\n{3,}/g, '\n\n').trim();
+
+                    // Shto tekstin e përgjigjes (pa kartelat)
+                    if (cleanText) {
+                        addMessage(cleanText, 'bot');
+                    }
+
+                    // 4. Shfaq kartelat për secilën ID unike
+                    const products = getProductsData();
+                    const addedProductIds = new Set(); // për të shmangur dublikatat në rast se e kemi shtuar tashmë
+
+                    for (const productId of allIds) {
+                        if (addedProductIds.has(productId)) continue;
+                        const product = products.find(p => p.id === productId);
+                        if (product) {
+                            addMessage('', 'bot', product);
+                            addedProductIds.add(productId);
+                            await new Promise(r => setTimeout(r, 60)); // vonesë e lehtë për animacion
+                        }
+                    }
+
+                    // Nëse nuk u gjet asnjë ID (asnjë kartelë), por përgjigja përmban tekst, mundohemi të gjejmë produkte të ngjashme sipas emrit
+                    if (allIds.length === 0 && cleanText.length > 0) {
+                        // Kërko emra produktesh në tekst
+                        const productNames = products.map(p => p.name.toLowerCase());
+                        let foundAny = false;
+                        for (const product of products) {
+                            if (cleanText.toLowerCase().includes(product.name.toLowerCase())) {
+                                if (!addedProductIds.has(product.id)) {
+                                    addMessage('', 'bot', product);
+                                    addedProductIds.add(product.id);
+                                    foundAny = true;
+                                    await new Promise(r => setTimeout(r, 60));
+                                }
+                            }
+                        }
+                        // Nëse prapë asgjë, shto 3 bestsellers si sugjerim
+                        if (!foundAny) {
+                            const bestsellers = products.filter(p => p.bestseller).slice(0, 3);
+                            for (const product of bestsellers) {
+                                addMessage('', 'bot', product);
+                                await new Promise(r => setTimeout(r, 60));
+                            }
+                        }
+                    }
+
+                    addQuickSuggestions();
                 }
-            } else {
-                addMessage("Më fal, pati një problem. Provo përsëri ose vizito dyqanin tonë! 🌸", 'bot');
-            }
-            
-            addQuickSuggestions();
-            // ✅ NUK BËJMË ASNJË SCROLL - përdoruesi rri aty ku ka lexuar
-        }
-        
-        function addQuickSuggestions() {
-            const oldReplies = messagesContainer.querySelectorAll('.quick-replies');
-            oldReplies.forEach(el => el.remove());
-            
-            const suggestions = ["🌸 Parfume për verë", "💼 Për zyrë", "⭐ Bestsellers", "🌙 Për mbrëmje"];
-            const suggestionDiv = document.createElement('div');
-            suggestionDiv.className = 'quick-replies';
-            suggestions.forEach(sug => {
-                const btn = document.createElement('span');
-                btn.className = 'quick-reply';
-                btn.innerText = sug;
-                btn.onclick = () => {
-                    chatInput.value = sug;
-                    sendMessage();
+
+                function addQuickSuggestions() {
+                    const oldReplies = messagesContainer.querySelectorAll('.quick-replies');
+                    oldReplies.forEach(el => el.remove());
+
+                    const suggestions = [
+                        "🌸 Parfume për verë që zgjasin gjatë",
+                        "💼 Aroma të lehta për zyrë",
+                        "⭐ Më të shiturit (bestsellers)",
+                        "🌙 Parfum romantik për mbrëmje",
+                        "💰 Buxhet nën 6000 Lekë"
+                    ];
+                    const suggestionDiv = document.createElement('div');
+                    suggestionDiv.className = 'quick-replies';
+                    suggestions.forEach(sug => {
+                        const btn = document.createElement('span');
+                        btn.className = 'quick-reply';
+                        btn.innerText = sug;
+                        btn.onclick = () => {
+                            chatInput.value = sug;
+                            sendMessage();
+                        };
+                        suggestionDiv.appendChild(btn);
+                    });
+                    messagesContainer.appendChild(suggestionDiv);
+                }
+
+                function showWelcome() {
+                    const welcomeText = "✨ **Mirësevjen në ERALL** ✨\n\nUnë jam asistenti yt për parfume luksoze. Më trego çfarë kërkoni dhe unë do të gjej aromën perfekte!\n\n💬 *Shembull: Dua parfum për verë që zgjat gjithë ditën*";
+                    addMessage(welcomeText, 'bot');
+                    addQuickSuggestions();
+                }
+
+                // Event Listeners
+                floatBtn.addEventListener('click', () => {
+                    widget.classList.add('open');
+                    if (chatMessages.length === 0) showWelcome();
+                });
+
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    widget.classList.remove('open');
+                });
+
+                sendBtn.addEventListener('click', sendMessage);
+                chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
+
+                window.viewProduct = function (productId) {
+                    window.location.href = `product.html?id=${productId}`;
                 };
-                suggestionDiv.appendChild(btn);
-            });
-            messagesContainer.appendChild(suggestionDiv);
-        }
-        
-        function showWelcome() {
-            const welcomeText = "✨ **Mirësevjen në ERALL** ✨\n\nUnë jam asistenti yt për parfume luksoze. Më trego çfarë kërkoni dhe unë do të gjej aromën perfekte!\n\n💬 *Shembull: Dua parfum për verë që zgjat gjithë ditën*";
-            addMessage(welcomeText, 'bot');
-            addQuickSuggestions();
-        }
-        
-        // Event Listeners
-        floatBtn.addEventListener('click', () => {
-            widget.classList.add('open');
-            if (chatMessages.length === 0) showWelcome();
-        });
-        
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            widget.classList.remove('open');
-        });
-        
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-        
-        window.viewProduct = function(productId) {
-            window.location.href = `product.html?id=${productId}`;
-        };
-        
-        window.addToCartFromChat = function(productId) {
-            const productsAll = getProductsData();
-            const product = productsAll.find(p => p.id === productId);
-            if (product) {
-                let cart = JSON.parse(localStorage.getItem('aromexa-cart')) || [];
-                const existing = cart.find(item => item.id === productId);
-                if(existing) existing.quantity += 1;
-                else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.categoryDisplay, quantity: 1 });
-                localStorage.setItem('aromexa-cart', JSON.stringify(cart));
-                if(typeof updateCartCount === 'function') updateCartCount();
-                addMessage(`🛍️ **${product.name}** u shtua në shportë!`, 'bot');
-            }
-        };
-    })();
-</script>
-    
-</body>
+
+                window.addToCartFromChat = function (productId) {
+                    const productsAll = getProductsData();
+                    const product = productsAll.find(p => p.id === productId);
+                    if (product) {
+                        let cart = JSON.parse(localStorage.getItem('aromexa-cart')) || [];
+                        const existing = cart.find(item => item.id === productId);
+                        if (existing) existing.quantity += 1;
+                        else cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, category: product.categoryDisplay, quantity: 1 });
+                        localStorage.setItem('aromexa-cart', JSON.stringify(cart));
+                        if (typeof updateCartCount === 'function') updateCartCount();
+                        addMessage(`🛍️ **${product.name}** u shtua në shportë!`, 'bot');
+                    }
+                };
+            })();
+        </script>
+    </body>
+
 </html>
